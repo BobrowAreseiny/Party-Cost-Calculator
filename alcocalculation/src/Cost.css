@@ -1,0 +1,53 @@
+.cost-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Два столбца */
+    gap: 30px; /* Промежуток между блоками */
+    width: calc(100% - 40px); /* Уменьшаем ширину для равных отступов от стенок */
+    max-width: 1200px;
+    margin: 20px auto; /* Центрирование с равными отступами сверху и снизу */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    box-sizing: border-box; /* Учет всех отступов и границ */
+}
+
+.cost-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #333;
+    border-radius: 10px; /* Скругление углов */
+    padding: 20px; /* Внутренние отступы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .cost-input-container label {
+        color: aliceblue;
+        font-size: clamp(14px, 2vw, 16px);
+        font-weight: bold;
+        margin-bottom: 8px; /* Отступ между меткой и полем */
+    }
+
+.cost-input {
+    box-sizing: border-box;
+    width: 100%; /* Полная ширина внутри родителя */
+    font-size: clamp(14px, 2vw, 16px); /* Адаптивный размер текста */
+    padding: 12px; /* Внутренний отступ для комфортного ввода */
+    border-radius: 8px;
+    border: 2px solid #555;
+    background-color: #222;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+    .cost-input:focus {
+        border-color: aliceblue;
+        box-shadow: 0 0 10px #f8e71c; /* Тень при фокусе */
+    }
+@media (max-width: 768px) {
+    .cost-inputs {
+        grid-template-columns: 1fr; /* Один столбец на маленьких экранах */
+    }
+}

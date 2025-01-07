@@ -1,0 +1,144 @@
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Увеличенный размер ячеек */
+    gap: 20px; /* Увеличенный промежуток между блоками */
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+}
+
+.checkbox-container {
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Учитываем размеры бордюров */
+    padding: 20px; /* Добавленный внутренний отступ */
+}
+
+    .checkbox-container h2 {
+        color: #fff;
+        font-size: clamp(18px, 2.5vw, 22px); /* Увеличенный адаптивный размер заголовка */
+        margin-bottom: 15px; /* Добавленный отступ снизу */
+    }
+
+.checkbox-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Центрирование списка чекбоксов */
+    gap: 15px; /* Увеличенный промежуток между чекбоксами */
+}
+
+
+.inline-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Увеличенный промежуток между чекбоксом и текстом */
+    font-size: clamp(16px, 2.5vw, 18px); /* Увеличенный адаптивный размер текста */
+    color: #fff;
+}
+
+.inline-checkboxes input[type="checkbox"] {
+    width: 24px; /* Увеличенный размер чекбокса */
+    height: 24px; /* Увеличенный размер чекбокса */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+.checkbox-container input[type="text"] {
+    background: none; /* Убираем фон */
+    border: none; /* Убираем границы */
+    outline: none; /* Убираем контуры */
+    color: #fff; /* Цвет текста */
+    text-align: center; /* Центрируем текст */
+    font-size: clamp(18px, 2.5vw, 22px); /* Размер текста */
+    transition: color 0.3s ease, font-size 0.3s ease; /* Плавный переход */
+    margin-bottom: 10px;
+}
+
+    .checkbox-container input[type="text"]:hover {
+        color: aliceblue; /* Цвет свечения текста */
+        font-size: clamp(20px, 3vw, 24px); /* Увеличенный размер текста */
+        cursor: pointer; /* Указатель при наведении */
+    }
+
+    .checkbox-container input[type="text"]:focus {
+        color: aliceblue; /* Цвет при фокусе */
+        font-size: clamp(20px, 3vw, 24px); /* Увеличенный размер текста */
+        cursor: text; /* Курсор ввода текста */
+    }
+
+
+/* Медиазапросы для улучшения адаптивности */
+@media (max-width: 768px) {
+    .checkbox-grid {
+        grid-template-columns: 1fr; /* Один столбец на маленьких экранах */
+    }
+
+    .checkbox-list {
+        flex-direction: column;
+        gap: 10px; /* Увеличенный промежуток на маленьких экранах */
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .checkbox-grid {
+        grid-template-columns: repeat(2, 1fr); /* Два столбца на средних экранах */
+    }
+}
+
+@media (max-width: 480px) {
+    .checkbox-container {
+        border-radius: 5px;
+    }
+}
+.result-display {
+    background-color: #222; /* Темный фон для вывода */
+    color: #fff; /* Белый цвет текста */
+    border: 1px solid #444; /* Тонкая граница для выделения */
+    border-radius: 10px; /* Скругленные углы */
+    padding: 20px; /* Внутренний отступ */
+    margin-top: 20px; /* Отступ сверху */
+    font-family: 'Courier New', Courier, monospace; /* Моносистемный шрифт для формата кода */
+    font-size: clamp(16px, 2vw, 18px); /* Адаптивный размер текста */
+    white-space: pre-wrap; /* Перенос строк и сохранение пробелов */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Тень для выделения */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+}
+
+    .result-display:hover {
+        background-color: #333; /* Светлее при наведении */
+        color: #e6e6e6; /* Нежный серый текст */
+    }
+
+    .result-display::before {
+        content: "Calculation Results:"; /* Заголовок перед текстом */
+        display: block;
+        font-weight: bold;
+        font-size: clamp(18px, 2.5vw, 20px);
+        color: #f7c15c; /* Золотистый цвет заголовка */
+        margin-bottom: 10px;
+    }
+
+    .result-display strong {
+        color: #f7c15c; /* Выделение ключевых частей текста */
+    }
+
+    .result-display em {
+        color: #f7a35c; /* Выделение вспомогательных частей текста */
+        font-style: italic;
+    }
+
+/* Адаптивность для вывода */
+@media (max-width: 768px) {
+    .result-display {
+        font-size: 14px; /* Уменьшение текста на маленьких экранах */
+    }
+}
+
+@media (max-width: 480px) {
+    .result-display {
+        padding: 15px; /* Меньший отступ на очень маленьких экранах */
+    }
+}

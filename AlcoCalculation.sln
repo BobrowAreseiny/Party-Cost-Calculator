@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "alcocalculation", "AlcoCalculation\alcocalculation.esproj", "{CAD60DB8-B732-4D23-866A-34229E8CDEAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAD60DB8-B732-4D23-866A-34229E8CDEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD60DB8-B732-4D23-866A-34229E8CDEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD60DB8-B732-4D23-866A-34229E8CDEAF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CAD60DB8-B732-4D23-866A-34229E8CDEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD60DB8-B732-4D23-866A-34229E8CDEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD60DB8-B732-4D23-866A-34229E8CDEAF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
