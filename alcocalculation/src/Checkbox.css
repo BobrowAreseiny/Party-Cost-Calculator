@@ -1,11 +1,12 @@
+п»ї
 .checkbox-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Увеличенный размер ячеек */
-    gap: 20px; /* Увеличенный промежуток между блоками */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* РЈРІРµР»РёС‡РµРЅРЅС‹Р№ СЂР°Р·РјРµСЂ СЏС‡РµРµРє */
+    gap: 20px; /* РЈРІРµР»РёС‡РµРЅРЅС‹Р№ РїСЂРѕРјРµР¶СѓС‚РѕРє РјРµР¶РґСѓ Р±Р»РѕРєР°РјРё */
     width: 100%;
     max-width: 1200px;
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: center; /* Центрирование по вертикали */
+    justify-content: center; /* Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё */
+    align-items: center; /* Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ РїРѕ РІРµСЂС‚РёРєР°Р»Рё */
 }
 
 .checkbox-container {
@@ -14,77 +15,105 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     width: 100%;
-    box-sizing: border-box; /* Учитываем размеры бордюров */
-    padding: 20px; /* Добавленный внутренний отступ */
+    box-sizing: border-box; /* РЈС‡РёС‚С‹РІР°РµРј СЂР°Р·РјРµСЂС‹ Р±РѕСЂРґСЋСЂРѕРІ */
+    padding: 20px; /* Р”РѕР±Р°РІР»РµРЅРЅС‹Р№ РІРЅСѓС‚СЂРµРЅРЅРёР№ РѕС‚СЃС‚СѓРї */
 }
 
     .checkbox-container h2 {
         color: #fff;
-        font-size: clamp(18px, 2.5vw, 22px); /* Увеличенный адаптивный размер заголовка */
-        margin-bottom: 15px; /* Добавленный отступ снизу */
+        font-size: clamp(18px, 2.5vw, 22px); /* РђРґР°РїС‚РёРІРЅС‹Р№ СЂР°Р·РјРµСЂ С‚РµРєСЃС‚Р° */
+        margin-bottom: 15px; /* Р”РѕР±Р°РІР»РµРЅРЅС‹Р№ РѕС‚СЃС‚СѓРї СЃРЅРёР·Сѓ */
     }
 
 .checkbox-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Центрирование списка чекбоксов */
-    gap: 15px; /* Увеличенный промежуток между чекбоксами */
+    justify-content: center; /* Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ СЃРїРёСЃРєР° С‡РµРєР±РѕРєСЃРѕРІ */
+    flex-direction: column; /* Р Р°СЃРїРѕР»Р°РіР°РµРј СЌР»РµРјРµРЅС‚С‹ РІРµСЂС‚РёРєР°Р»СЊРЅРѕ */
+    gap: 15px; /* РЈРІРµР»РёС‡РµРЅРЅС‹Р№ РїСЂРѕРјРµР¶СѓС‚РѕРє РјРµР¶РґСѓ С‡РµРєР±РѕРєСЃР°РјРё */
+    place-content:center;
 }
 
+
+.checkbox-label {
+    color: #f7c15c;
+    font-size: clamp(14px, 2vw, 16px);
+    display: flex; /* Р”Р»СЏ РІС‹СЂР°РІРЅРёРІР°РЅРёСЏ С‡РµРєР±РѕРєСЃР° Рё С‚РµРєСЃС‚Р° */
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+    .checkbox-label:hover {
+        color: #f7a35c;
+    }
+
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
 
 .inline-checkboxes label {
     display: flex;
     align-items: center;
-    gap: 15px; /* Увеличенный промежуток между чекбоксом и текстом */
-    font-size: clamp(16px, 2.5vw, 18px); /* Увеличенный адаптивный размер текста */
+    gap: 15px; /* РЈРІРµР»РёС‡РµРЅРЅС‹Р№ РїСЂРѕРјРµР¶СѓС‚РѕРє РјРµР¶РґСѓ С‡РµРєР±РѕРєСЃРѕРј Рё С‚РµРєСЃС‚РѕРј */
+    font-size: clamp(18px, 2.5vw, 20px); /* РђРґР°РїС‚РёРІРЅС‹Р№ СЂР°Р·РјРµСЂ С‚РµРєСЃС‚Р° */
     color: #fff;
 }
 
 .inline-checkboxes input[type="checkbox"] {
-    width: 24px; /* Увеличенный размер чекбокса */
-    height: 24px; /* Увеличенный размер чекбокса */
-    cursor: pointer; /* Указатель при наведении */
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
 .checkbox-container input[type="text"] {
-    background: none; /* Убираем фон */
-    border: none; /* Убираем границы */
-    outline: none; /* Убираем контуры */
-    color: #fff; /* Цвет текста */
-    text-align: center; /* Центрируем текст */
-    font-size: clamp(18px, 2.5vw, 22px); /* Размер текста */
-    transition: color 0.3s ease, font-size 0.3s ease; /* Плавный переход */
+    font-family: 'Courier New', Courier, monospace; /* Р—Р°РґР°РµС‚ С€СЂРёС„С‚ РІСЃРµРјСѓ РґРѕРєСѓРјРµРЅС‚Сѓ СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј */
+    font-weight: bold; /* Р–РёСЂРЅС‹Р№ С€СЂРёС„С‚ */
+    background: none; /* РЈР±РёСЂР°РµРј С„РѕРЅ */
+    border: none; /* РЈР±РёСЂР°РµРј РіСЂР°РЅРёС†С‹ */
+    outline: none; /* РЈР±РёСЂР°РµРј РєРѕРЅС‚СѓСЂС‹ */
+    color: #f7c15c;
+    text-align: center;
+    font-size: clamp(20px, 2.5vw, 24px); /* РђРґР°РїС‚РёРІРЅС‹Р№ СЂР°Р·РјРµСЂ С‚РµРєСЃС‚Р° */
+    transition: color 0.3s ease, font-size 0.3s ease;
     margin-bottom: 10px;
+    resize: horizontal; /* Р—Р°РїСЂРµС‰Р°РµРј РёР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂР° РїРѕ РІРµСЂС‚РёРєР°Р»Рё */
+    overflow: hidden; /* РЎРєСЂС‹РІР°РµРј СЃРєСЂРѕР»Р»РёРЅРі */
 }
 
-    .checkbox-container input[type="text"]:hover {
-        color: aliceblue; /* Цвет свечения текста */
-        font-size: clamp(20px, 3vw, 24px); /* Увеличенный размер текста */
-        cursor: pointer; /* Указатель при наведении */
-    }
+.result-display {
+    font-family: 'Courier New', Courier, monospace; /* Р—Р°РґР°РµС‚ С€СЂРёС„С‚ РІСЃРµРјСѓ РґРѕРєСѓРјРµРЅС‚Сѓ СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј */
 
-    .checkbox-container input[type="text"]:focus {
-        color: aliceblue; /* Цвет при фокусе */
-        font-size: clamp(20px, 3vw, 24px); /* Увеличенный размер текста */
-        cursor: text; /* Курсор ввода текста */
-    }
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: clamp(14px, 1vw, 16px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+    
 
 
-/* Медиазапросы для улучшения адаптивности */
+
 @media (max-width: 768px) {
     .checkbox-grid {
-        grid-template-columns: 1fr; /* Один столбец на маленьких экранах */
+        grid-template-columns: 1fr;
     }
 
     .checkbox-list {
         flex-direction: column;
-        gap: 10px; /* Увеличенный промежуток на маленьких экранах */
+        gap: 10px;
     }
-}
 
-@media (max-width: 1024px) and (min-width: 769px) {
-    .checkbox-grid {
-        grid-template-columns: repeat(2, 1fr); /* Два столбца на средних экранах */
+    .result-display {
+        font-size: 14px;
     }
 }
 
@@ -92,53 +121,8 @@
     .checkbox-container {
         border-radius: 5px;
     }
-}
-.result-display {
-    background-color: #222; /* Темный фон для вывода */
-    color: #fff; /* Белый цвет текста */
-    border: 1px solid #444; /* Тонкая граница для выделения */
-    border-radius: 10px; /* Скругленные углы */
-    padding: 20px; /* Внутренний отступ */
-    margin-top: 20px; /* Отступ сверху */
-    font-family: 'Courier New', Courier, monospace; /* Моносистемный шрифт для формата кода */
-    font-size: clamp(16px, 2vw, 18px); /* Адаптивный размер текста */
-    white-space: pre-wrap; /* Перенос строк и сохранение пробелов */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Тень для выделения */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
-}
 
-    .result-display:hover {
-        background-color: #333; /* Светлее при наведении */
-        color: #e6e6e6; /* Нежный серый текст */
-    }
-
-    .result-display::before {
-        content: "Calculation Results:"; /* Заголовок перед текстом */
-        display: block;
-        font-weight: bold;
-        font-size: clamp(18px, 2.5vw, 20px);
-        color: #f7c15c; /* Золотистый цвет заголовка */
-        margin-bottom: 10px;
-    }
-
-    .result-display strong {
-        color: #f7c15c; /* Выделение ключевых частей текста */
-    }
-
-    .result-display em {
-        color: #f7a35c; /* Выделение вспомогательных частей текста */
-        font-style: italic;
-    }
-
-/* Адаптивность для вывода */
-@media (max-width: 768px) {
     .result-display {
-        font-size: 14px; /* Уменьшение текста на маленьких экранах */
-    }
-}
-
-@media (max-width: 480px) {
-    .result-display {
-        padding: 15px; /* Меньший отступ на очень маленьких экранах */
+        padding: 15px;
     }
 }

@@ -8,44 +8,70 @@
     justify-content: center; /* Центрирование по горизонтали */
     align-items: center; /* Центрирование по вертикали */
     box-sizing: border-box; /* Учет всех отступов и границ */
+    border-radius: 12px; /* Скруглённые углы контейнера */
 }
 
 .cost-input-container {
+    background-color: #222;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: #333;
     border-radius: 10px; /* Скругление углов */
     padding: 20px; /* Внутренние отступы */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 100%;
     box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Тень */
+    border: 1px solid #333; /* Тонкая граница, сочетающаяся с фоном */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Плавный переход для эффекта */
 }
 
-    .cost-input-container label {
-        color: aliceblue;
-        font-size: clamp(14px, 2vw, 16px);
-        font-weight: bold;
-        margin-bottom: 8px; /* Отступ между меткой и полем */
+    .cost-input-container:hover {
+        border-color: #b3b3b3; /* Золотистая подсветка границы при наведении */
+        box-shadow: 0 4px 15px; /* Светящаяся тень */
     }
+
+    .cost-input-container label {
+        color: #f7c15c;
+        font-size: clamp(16px, 2.5vw, 20px);
+        font-weight: bold;
+        margin-bottom: 10px; /* Отступ снизу метки */
+        padding-bottom: 5px; /* Отступ от линии текста метки */
+        display: flex;
+        flex-direction: column; /* Размещаем текст и поле ввода в колонку */
+        gap: 10px; /* Расстояние между текстом и полем ввода */
+    }
+
+    .cost-input-container input {
+        padding: 10px; /* Внутренние отступы поля ввода */
+        border-radius: 5px; /* Скругленные углы поля ввода */
+        border: 1px solid #b3b3b3; /* Цвет границы поля ввода */
+        font-size: 14px; /* Размер текста */
+        box-sizing: border-box;
+    }
+
+.highlighted-number {
+    font-weight: bold; /* Жирный шрифт */
+
+}
+
 
 .cost-input {
     box-sizing: border-box;
+    background-color: #1f1f1f; /* Ещё более светлый серый */
     width: 100%; /* Полная ширина внутри родителя */
     font-size: clamp(14px, 2vw, 16px); /* Адаптивный размер текста */
     padding: 12px; /* Внутренний отступ для комфортного ввода */
     border-radius: 8px;
-    border: 2px solid #555;
-    background-color: #222;
-    color: #fff;
+    border: 1px solid #444; /* Тонкая граница, слегка светлее фона */
+    color: #d6d6d6; /* Светлый серый текст */
     outline: none;
-    transition: border-color 0.3s ease;
 }
 
     .cost-input:focus {
-        border-color: aliceblue;
-        box-shadow: 0 0 10px #f8e71c; /* Тень при фокусе */
+        border-color: #666; /* Более светлая граница при фокусе */
+        background-color: #292929; /* Немного светлее при фокусе */
     }
+
 @media (max-width: 768px) {
     .cost-inputs {
         grid-template-columns: 1fr; /* Один столбец на маленьких экранах */

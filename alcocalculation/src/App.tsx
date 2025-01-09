@@ -8,14 +8,16 @@ import './Cost.css';
 import React from 'react';
 
 function App() {
-    const [count, setCount] = useState(6); // Начальное значение
+    const [count, setCount] = useState(6);
     const [personCosts, setPersonCosts] = useState([]);
+   
+    const [headers, setHeaders] = useState([
+        'ARSENIY', 'SIMON', 'VLADIMIR', 'VLADISLAV', 'ZAHAR', 'AGNES'
+    ]);
     const [checkboxes, setCheckboxes] = useState(
         Array(6).fill({ waterFood: true, alcohol: true, carOwner: false, anotherFood: false })
     );
-    const [headers, setHeaders] = useState([
-        'Arseniy', 'Simen', 'Vladimir', 'Vladislav', 'Zahar', 'Agni'
-    ]);
+
     const [foodCost, setFoodCost] = useState('');
     const [alcoholCost, setAlcoholCost] = useState('');
     const [fuelCost, setFuelCost] = useState('');
@@ -28,7 +30,7 @@ function App() {
     const increaseCount = () => {
         setCount(count + 1);
         setCheckboxes([...checkboxes, { waterFood: true, alcohol: true, carOwner: false, anotherFood: false }]);
-        setHeaders([...headers, `Person ${count + 1}`]);
+        setHeaders([...headers, `PERSON ${count + 1}`]);
     };
 
     const decreaseCount = () => {
@@ -91,34 +93,35 @@ function App() {
 
         const detailsPerPerson = headers.map((header, index) => {
             let personCost = 0;
-            let details = [`${header}'s breakdown:`];
+            let details = [`${header}'s sum:`];
+
 
             if (checkboxes[index].waterFood) {
                 const applicablePeople = checkboxes.filter(cb => cb.waterFood).length;
                 const individualFoodCost = totalFoodCost / applicablePeople;
                 personCost += individualFoodCost;
-                details.push(`- Water & Food: ${individualFoodCost.toFixed(2)}`);
+                details.push(`Water & Food: ${individualFoodCost.toFixed(2)}`);
             }
 
             if (checkboxes[index].alcohol) {
                 const applicablePeople = checkboxes.filter(cb => cb.alcohol).length;
                 const individualAlcoholCost = totalAlcoholCost / applicablePeople;
                 personCost += individualAlcoholCost;
-                details.push(`- Alcohol: ${individualAlcoholCost.toFixed(2)}`);
+                details.push(`Alcohol: ${individualAlcoholCost.toFixed(2)}`);
             }
 
             if (!checkboxes[index].carOwner) {
                 const applicablePeople = checkboxes.filter(cb => !cb.carOwner).length;
                 const individualFuelCost = totalFuelCost / applicablePeople;
                 personCost += individualFuelCost;
-                details.push(`- Fuel: ${individualFuelCost.toFixed(2)}`);
+                details.push(`Fuel: ${individualFuelCost.toFixed(2)}`);
             }
 
             if (checkboxes[index].anotherFood) {
                 const applicablePeople = checkboxes.filter(cb => cb.anotherFood).length;
                 const individualAnotherFoodCost = totalAnotherFoodCost / applicablePeople;
                 personCost += individualAnotherFoodCost;
-                details.push(`- Pizza: ${individualAnotherFoodCost.toFixed(2)}`);
+                details.push(`Pizza: ${individualAnotherFoodCost.toFixed(2)}`);
             }
 
             details.push(`Total: ${personCost.toFixed(2)}`);
@@ -130,7 +133,7 @@ function App() {
         setPersonCosts(detailsPerPerson);
 
         setResult(
-            `Total Cost: $${totalCost.toFixed(2)}`
+            `${totalCost.toFixed(2)}`
         );
     };
 
@@ -176,7 +179,7 @@ function App() {
                                 disabled={!isAnotherFoodEnabled}
                             />
                             {!isAnotherFoodEnabled && (
-                                <span className="input-hint">* Enable the "Pizza" checkbox to unlock this field</span>
+                                <span className="input-hint">*  Enable the "Pizza" checkbox to unlock this field  </span>
                             )}
                         </label>
                     </div>
@@ -191,11 +194,12 @@ function App() {
                                 disabled={!isFuelEnabled}
                             />
                             {!isFuelEnabled && (
-                                <span className="input-hint">* Enable the "Car Owner" checkbox to unlock this field</span>
+                                <span className="input-hint">*  Enable the "Car Owner" checkbox to unlock this field</span>
                             )}
                         </label>
                     </div>
                 </div>
+
                 <div className="count-buttons">
                     <button onClick={decreaseCount} className="count-button">-</button>
                     <input
@@ -206,8 +210,12 @@ function App() {
                     />
                     <button onClick={increaseCount} className="count-button">+</button>
                 </div>
-                {result && <pre className="result-display">{result}</pre>}
 
+                {result && (
+                    <pre className="result-display">
+                        Total Cost: <span className="highlighted-number">{result}</span>
+                    </pre>
+                )}
             </div>
 
             <div className="checkbox-grid">
@@ -220,38 +228,41 @@ function App() {
                             onChange={(e) => handleHeaderChange(index, e.target.value)}
                         />
                         <div className="checkbox-list inline-checkboxes">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={checkbox.waterFood}
-                                    onChange={() => handleCheckboxChange(index, 'waterFood')}
-                                />
-                                Water & Food
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={checkbox.alcohol}
-                                    onChange={() => handleCheckboxChange(index, 'alcohol')}
-                                />
-                                Alcohol
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={checkbox.anotherFood}
-                                    onChange={() => handleCheckboxChange(index, 'anotherFood')}
-                                />
-                                Pizza
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={checkbox.carOwner}
-                                    onChange={() => handleCheckboxChange(index, 'carOwner')}
-                                />
-                                Car Owner
-                            </label>
+                            <div className="checkbox-group">
+                                <label className="checkbox-label">
+                                    <input
+                                        type="checkbox"
+                                        checked={checkbox.waterFood}
+                                        onChange={() => handleCheckboxChange(index, 'waterFood')}
+                                    />
+                                    Water & Food
+                                </label>
+                                <label className="checkbox-label">
+                                    <input
+                                        type="checkbox"
+                                        checked={checkbox.alcohol}
+                                        onChange={() => handleCheckboxChange(index, 'alcohol')}
+                                    />
+                                    Alcohol
+                                </label>
+                                <label className="checkbox-label">
+                                    <input
+                                        type="checkbox"
+                                        checked={checkbox.anotherFood}
+                                        onChange={() => handleCheckboxChange(index, 'anotherFood')}
+                                    />
+                                    Pizza
+                                </label>
+                                <label className="checkbox-label">
+                                    <input
+                                        type="checkbox"
+                                        checked={checkbox.carOwner}
+                                        onChange={() => handleCheckboxChange(index, 'carOwner')}
+                                    />
+                                    Car Owner
+                                </label>
+                            </div>
+
                         </div>
                         {personCosts[index] && (
                             <pre

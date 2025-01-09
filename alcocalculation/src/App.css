@@ -1,5 +1,4 @@
 ﻿body {
-    font-family: Arial, sans-serif;
     background-color: #1c1c1c;
     color: #fff;
     margin: 0;
@@ -9,28 +8,40 @@
     align-items: center;
     gap: 20px; /* Расстояние между основными блоками */
     min-height: 100vh;
+    font-family: 'Courier New', Courier, monospace; /* Задает шрифт всему документу с приоритетом */
+    font-size: 16px !important; /* Задает размер шрифта всему документу */
+    line-height: 1.5 !important; /* Задает межстрочный интервал */
+    text-transform: uppercase; /* Верхний регистр для заголовков */
+    letter-spacing: 2px; /* Межбуквенный интервал */
+}
+
+.card {
+    background-color: #333; /* Темный фон, такой же как у h1 */
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px 0;
+    text-align: center;
+    padding: 25px; /* Увеличенный отступ */
+    box-sizing: border-box; /* Учет padding в ширине */
+    border: 1px solid #333; /* Более тонкая граница */
+    border-radius: 12px; /* Более выразительные углы */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Глубокая тень */
 }
 
 h1 {
-    background-color: #222; /* Темный фон */
-    color: #f7c15c; /* Золотистый текст */
-    border: 2px solid #444; /* Тонкая граница */
+    background-color: #333; /* Темный фон */
+    color: #f7c15c;
+    border: 1px solid #444; /* Тонкая граница */
     border-radius: 10px; /* Скругленные углы */
-    padding: 15px 20px; /* Внутренний отступ */
+    padding: 20px; /* Внутренний отступ */
     margin-bottom: 20px; /* Отступ снизу */
     font-family: 'Courier New', Courier, monospace; /* Моносистемный шрифт */
-    font-size: clamp(24px, 3vw, 32px); /* Адаптивный размер текста */
+    font-size: clamp(26px, 3vw, 34px); /* Адаптивный размер текста */
     text-align: center; /* Центрирование текста */
-    text-transform: uppercase; /* Верхний регистр для заголовков */
-    letter-spacing: 2px; /* Межбуквенный интервал */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Тень */
     transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
 }
 
-    h1:hover {
-        background-color: #333; /* Светлее при наведении */
-        color: #e6e6e6; /* Нежный серый текст */
-    }
 
     h1::before {
         content: "🎉 "; /* Эмодзи перед текстом */
@@ -40,37 +51,28 @@ h1 {
         content: " 🎉"; /* Эмодзи после текста */
     }
 
-
-.card {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px 0;
-    text-align: center;
-    padding: 20px; /* Увеличенный отступ */
-    box-sizing: border-box; /* Учет padding в ширине */
-}
-
 .count-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 20px;
 }
 
 .count-button {
-    background-color: #444;
-    color: #fff;
+    background-color: #222;
     font-size: clamp(16px, 2vw, 20px); /* Адаптивный размер кнопок */
-    padding: 10px 15px;
+    padding: 12px 18px;
+    width: 50px;
+    height: 50px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
     .count-button:hover {
-        background-color: #555;
+        border-color: #b3b3b3; /* Золотистая подсветка границы при наведении */
+        box-shadow: 0 4px 15px; /* Светящаяся тень */
     }
 
 .count-input {
@@ -80,15 +82,15 @@ h1 {
     padding: 10px;
     border-radius: 5px;
     border: 2px solid #444;
-    background-color: #222;
-    color: #fff;
+    background-color: #1c1c1c;
+    color: #e0e0e0;
 }
 
 .input-hint {
     display: block;
     margin-top: 5px;
-    font-size: 12px; /* Размер текста для подсказки */
-    color: #f5a623; /* Цвет текста (можно изменить на любой другой) */
+    font-size: 14px; /* Размер текста для подсказки */
+    color: #bababa; /* Цвет текста */
     font-style: italic; /* Наклонный текст */
 }
 
@@ -96,5 +98,9 @@ h1 {
 @media (max-width: 480px) {
     h1 {
         font-size: 20px;
+    }
+
+    .card {
+        padding: 15px; /* Меньший отступ на маленьких экранах */
     }
 }
