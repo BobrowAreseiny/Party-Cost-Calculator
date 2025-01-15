@@ -7,56 +7,68 @@ import './Checkbox.css';
 import './Cost.css';
 import React from 'react';
 
+    interface Checkbox {
+        waterFood: boolean;
+        alcohol: boolean;
+        carOwner: boolean;
+        anotherFood: boolean;
+}
+
 function App() {
     const [count, setCount] = useState(6);
-    const [personCosts, setPersonCosts] = useState([]);
-   
-    const [headers, setHeaders] = useState([
-        'ARSENIY', 'SIMON', 'VLADIMIR', 'VLADISLAV', 'ZAHAR', 'AGNES'
-    ]);
-    const [checkboxes, setCheckboxes] = useState(
+    const [personCosts, setPersonCosts] = useState<string[]>([]);
+    const [headers, setHeaders] = useState<string[]>(['ARSENIY', 'SIMON', 'VLADIMIR', 'VLADISLAV', 'ZAHAR', 'AGNES']);
+
+    const [checkboxes, setCheckboxes] = useState<Checkbox[]>(
         Array(6).fill({ waterFood: true, alcohol: true, carOwner: false, anotherFood: false })
     );
 
-    const [foodCost, setFoodCost] = useState('');
-    const [alcoholCost, setAlcoholCost] = useState('');
-    const [fuelCost, setFuelCost] = useState('');
-    const [anotherFoodCost, setAnotherFoodCost] = useState('');
-    const [result, setResult] = useState('');
+    const [foodCost, setFoodCost] = useState<string>('');
+    const [alcoholCost, setAlcoholCost] = useState<string>('');
+    const [fuelCost, setFuelCost] = useState<string>('');
+    const [anotherFoodCost, setAnotherFoodCost] = useState<string>('');
+    const [result, setResult] = useState<string>('');
 
     const isFuelEnabled = checkboxes.some(checkbox => checkbox.carOwner);
     const isAnotherFoodEnabled = checkboxes.some(checkbox => checkbox.anotherFood);
 
     const increaseCount = () => {
-        setCount(count + 1);
+        setCount(prevCount => prevCount + 1);
         setCheckboxes([...checkboxes, { waterFood: true, alcohol: true, carOwner: false, anotherFood: false }]);
         setHeaders([...headers, `PERSON ${count + 1}`]);
+        setFoodCost(foodCost);
     };
 
     const decreaseCount = () => {
         if (count > 1) {
-            setCount(count - 1);
+            setCount(prevCount => prevCount - 1);
             setCheckboxes(checkboxes.slice(0, -1));
             setHeaders(headers.slice(0, -1));
+            setFoodCost(foodCost.slice(0, -1));
         }
     };
 
-    const handleInputChange = (e: { target: { value: string; }; }) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value, 10);
         if (!isNaN(value) && value > 0) {
             setCount(value);
             const difference = value - checkboxes.length;
             if (difference > 0) {
-                setCheckboxes([...checkboxes, ...Array(difference).fill({ waterFood: true, alcohol: true, carOwner: false, anotherFood: false })]);
-                setHeaders([...headers, ...Array(difference).fill(`Person ${checkboxes.length + 1}`)]);
+                setCheckboxes([
+                    ...checkboxes,
+                    ...Array(difference).fill({ waterFood: true, alcohol: true, carOwner: false, anotherFood: false })
+                ]);
+                setHeaders([...headers, ...Array(difference).fill(`PERSON ${checkboxes.length + 1}`)]);
+                setFoodCost(foodCost);
             } else if (difference < 0) {
                 setCheckboxes(checkboxes.slice(0, value));
                 setHeaders(headers.slice(0, value));
+                setFoodCost(foodCost.slice(0, value));
             }
         }
     };
 
-    const handleCheckboxChange = (index: number, field: string) => {
+    const handleCheckboxChange = (index: number, field: keyof Checkbox) => {
         const updatedCheckboxes = checkboxes.map((checkbox, i) =>
             i === index ? { ...checkbox, [field]: !checkbox[field] } : checkbox
         );
@@ -71,7 +83,9 @@ function App() {
         }
     };
 
-    const handlePositiveNumberInput = (setter: { (value: React.SetStateAction<string>): void; (value: React.SetStateAction<string>): void; (value: React.SetStateAction<string>): void; (value: React.SetStateAction<string>): void; (arg0: any): void; }) => (e: { target: { value: any; }; }) => {
+    const handlePositiveNumberInput = (setter: React.Dispatch<React.SetStateAction<string>>) => (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
         const value = e.target.value;
         if (/^(?:\d*\.?\d*)$/.test(value) && (value === '' || parseFloat(value) > 0)) {
             setter(value);
@@ -84,7 +98,7 @@ function App() {
     };
 
     const calculateCost = () => {
-        const totalFoodCost = parseFloat(foodCost) || 0;
+        const totalFoodCost = parseFloat(foodCost) || 0;5
         const totalAlcoholCost = parseFloat(alcoholCost) || 0;
         const totalFuelCost = parseFloat(fuelCost) || 0;
         const totalAnotherFoodCost = parseFloat(anotherFoodCost) || 0;
@@ -94,7 +108,6 @@ function App() {
         const detailsPerPerson = headers.map((header, index) => {
             let personCost = 0;
             let details = [`${header}'s sum:`];
-
 
             if (checkboxes[index].waterFood) {
                 const applicablePeople = checkboxes.filter(cb => cb.waterFood).length;
@@ -131,10 +144,7 @@ function App() {
         });
 
         setPersonCosts(detailsPerPerson);
-
-        setResult(
-            `${totalCost.toFixed(2)}`
-        );
+        setResult(totalCost.toFixed(2));
     };
 
     useEffect(() => {
@@ -142,6 +152,7 @@ function App() {
     }, [foodCost, alcoholCost, fuelCost, anotherFoodCost, checkboxes, headers]);
 
     return (
+
         <>
             <h1>Party Cost Calculator</h1>
             <div className="card">
