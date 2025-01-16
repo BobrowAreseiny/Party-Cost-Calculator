@@ -17,6 +17,9 @@
     width: 100%;
     box-sizing: border-box; /* Учитываем размеры бордюров */
     padding: 20px; /* Добавленный внутренний отступ */
+
+    min-height: 400px;
+    max-height: 480px; /* Максимальная высота */
 }
 
     .checkbox-container h2 {
@@ -43,6 +46,7 @@
     gap: 10px;
     cursor: pointer;
     transition: color 0.3s ease;
+
 }
 
     .checkbox-label:hover {

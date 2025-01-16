@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prefer-const */
+
+import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './App.css';
 import './Checkbox.css';
 import './Cost.css';
-import React from 'react';
 
     interface Checkbox {
         waterFood: boolean;
@@ -23,14 +24,15 @@ function App() {
         Array(6).fill({ waterFood: true, alcohol: true, carOwner: false, anotherFood: false })
     );
 
+    const isFuelEnabled = checkboxes.some(checkbox => checkbox.carOwner);
+    const isAnotherFoodEnabled = checkboxes.some(checkbox => checkbox.anotherFood);
+
     const [foodCost, setFoodCost] = useState<string>('');
     const [alcoholCost, setAlcoholCost] = useState<string>('');
     const [fuelCost, setFuelCost] = useState<string>('');
     const [anotherFoodCost, setAnotherFoodCost] = useState<string>('');
     const [result, setResult] = useState<string>('');
 
-    const isFuelEnabled = checkboxes.some(checkbox => checkbox.carOwner);
-    const isAnotherFoodEnabled = checkboxes.some(checkbox => checkbox.anotherFood);
 
     const increaseCount = () => {
         setCount(prevCount => prevCount + 1);
@@ -44,7 +46,6 @@ function App() {
             setCount(prevCount => prevCount - 1);
             setCheckboxes(checkboxes.slice(0, -1));
             setHeaders(headers.slice(0, -1));
-            setFoodCost(foodCost.slice(0, -1));
         }
     };
 
@@ -98,7 +99,7 @@ function App() {
     };
 
     const calculateCost = () => {
-        const totalFoodCost = parseFloat(foodCost) || 0;5
+        const totalFoodCost = parseFloat(foodCost) || 0;
         const totalAlcoholCost = parseFloat(alcoholCost) || 0;
         const totalFuelCost = parseFloat(fuelCost) || 0;
         const totalAnotherFoodCost = parseFloat(anotherFoodCost) || 0;
@@ -107,45 +108,58 @@ function App() {
 
         const detailsPerPerson = headers.map((header, index) => {
             let personCost = 0;
-            let details = [`${header}'s sum:`];
 
-            if (checkboxes[index].waterFood) {
-                const applicablePeople = checkboxes.filter(cb => cb.waterFood).length;
-                const individualFoodCost = totalFoodCost / applicablePeople;
-                personCost += individualFoodCost;
-                details.push(`Water & Food: ${individualFoodCost.toFixed(2)}`);
-            }
+            const hasPizzaSelected = checkboxes.some(cb => cb.anotherFood);
 
-            if (checkboxes[index].alcohol) {
-                const applicablePeople = checkboxes.filter(cb => cb.alcohol).length;
-                const individualAlcoholCost = totalAlcoholCost / applicablePeople;
-                personCost += individualAlcoholCost;
-                details.push(`Alcohol: ${individualAlcoholCost.toFixed(2)}`);
-            }
+            let details = `${header}'s Summary:\n` + "-".repeat(20) + "\n";
 
-            if (!checkboxes[index].carOwner) {
-                const applicablePeople = checkboxes.filter(cb => !cb.carOwner).length;
-                const individualFuelCost = totalFuelCost / applicablePeople;
+            // Water & Food
+            const applicableFoodPeople = checkboxes.filter(cb => cb.waterFood).length;
+            const individualFoodCost = applicableFoodPeople > 0 ? totalFoodCost / applicableFoodPeople : 0;
+            personCost += individualFoodCost;
+            details += `Water & Food: ${individualFoodCost.toFixed(2)} byn.\n`;
+
+            // Alcohol
+            const applicableAlcoholPeople = checkboxes.filter(cb => cb.alcohol).length;
+            const individualAlcoholCost = applicableAlcoholPeople > 0 ? totalAlcoholCost / applicableAlcoholPeople : 0;
+            personCost += individualAlcoholCost;
+            details += `Alcohol: ${individualAlcoholCost.toFixed(2)} byn.\n`;
+
+            // Fuel
+            if (checkboxes[index].carOwner) {
+                details += `Fuel: 0.00 byn.\n`;
+            } else {
+                const applicableFuelPeople = checkboxes.filter(cb => !cb.carOwner).length;
+                const individualFuelCost = applicableFuelPeople > 0 ? totalFuelCost / applicableFuelPeople : 0;
                 personCost += individualFuelCost;
-                details.push(`Fuel: ${individualFuelCost.toFixed(2)}`);
+                details += `Fuel: ${individualFuelCost.toFixed(2)} byn.\n`;
             }
 
-            if (checkboxes[index].anotherFood) {
-                const applicablePeople = checkboxes.filter(cb => cb.anotherFood).length;
-                const individualAnotherFoodCost = totalAnotherFoodCost / applicablePeople;
-                personCost += individualAnotherFoodCost;
-                details.push(`Pizza: ${individualAnotherFoodCost.toFixed(2)}`);
+            // Pizza (only include if checkbox is true)
+            if (hasPizzaSelected) {
+                if (checkboxes[index].anotherFood) {
+                    const applicablePizzaPeople = checkboxes.filter(cb => cb.anotherFood).length;
+                    const individualPizzaCost = applicablePizzaPeople > 0 ? totalAnotherFoodCost / applicablePizzaPeople : 0;
+                    personCost += individualPizzaCost;
+                    details += `Other food: ${individualPizzaCost.toFixed(2)} byn.\n`;
+                }
+                else {
+                    details += `Other food: 0.00 byn.\n`;
+                }
+            }
+            else {
+                details += `Other food: 0.00 byn.\n`;
             }
 
-            details.push(`Total: ${personCost.toFixed(2)}`);
+            details += `Total: ${personCost.toFixed(2)} byn.\n`;
             totalCost += personCost;
 
-            return details.join('\n');
+            return details;
         });
-
         setPersonCosts(detailsPerPerson);
-        setResult(totalCost.toFixed(2));
+        setResult(`${totalCost.toFixed(2)}`);
     };
+
 
     useEffect(() => {
         calculateCost();
@@ -181,7 +195,7 @@ function App() {
                     </div>
                     <div className="cost-input-container">
                         <label>
-                            Pizza Cost:
+                            Other Food:
                             <input
                                 type="text"
                                 value={anotherFoodCost}
@@ -189,10 +203,10 @@ function App() {
                                 className="cost-input"
                                 disabled={!isAnotherFoodEnabled}
                             />
-                            {!isAnotherFoodEnabled && (
-                                <span className="input-hint">*  Enable the "Pizza" checkbox to unlock this field  </span>
-                            )}
-                        </label>
+                            {
+                                <span className="input-hint">Enable the "Pizza" checkbox to unlock this field  </span>                           
+                            }
+                         </label>
                     </div>
                     <div className="cost-input-container">
                         <label>
@@ -204,9 +218,7 @@ function App() {
                                 className="cost-input"
                                 disabled={!isFuelEnabled}
                             />
-                            {!isFuelEnabled && (
-                                <span className="input-hint">*  Enable the "Car Owner" checkbox to unlock this field</span>
-                            )}
+                                <span className="input-hint">Enable the "Car Owner" checkbox to unlock this field</span>
                         </label>
                     </div>
                 </div>
@@ -262,7 +274,7 @@ function App() {
                                         checked={checkbox.anotherFood}
                                         onChange={() => handleCheckboxChange(index, 'anotherFood')}
                                     />
-                                    Pizza
+                                    Other Food
                                 </label>
                                 <label className="checkbox-label">
                                     <input
